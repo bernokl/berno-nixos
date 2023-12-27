@@ -4,18 +4,18 @@
 
 { config, pkgs, ... }:
 
-  {
-    imports =
-      [ 
-        ./hardware-configuration.nix
-	./cli.nix
-      ];
-  
+{
+  imports =
+    [
+      ./hardware-configuration.nix
+      ./cli.nix
+    ];
 
-   programs.gnupg.agent = {
-     enable = true;
-#     enableSSHSupport = true;
-   };
+
+  programs.gnupg.agent = {
+    enable = true;
+    #     enableSSHSupport = true;
+  };
 
 
 
@@ -65,7 +65,7 @@
   # Add steam for Finn
   # programs.steam.enable = true;
   nixpkgs.config.permittedInsecurePackages = [
-     "nodejs-16.20.2"
+    "nodejs-16.20.2"
   ];
 
 
@@ -114,7 +114,7 @@
     isNormalUser = true;
     description = "berno";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
-      packages = with pkgs; [
+    packages = with pkgs; [
       firefox
       openssl
       htop

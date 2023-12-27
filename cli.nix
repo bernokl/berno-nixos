@@ -24,14 +24,16 @@
     shellInit = ''
       #source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
     '';
-    promptInit = let 
-	shell-config = pkgs.callPackage ./shell-config.nix {};
-    in ''
-      ${builtins.readFile (shell-config.override { dockerAliasEnabled = config.virtualisation.docker.enable; })}
-      autoload -U promptinit && promptinit && prompt pure
-      #complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
-      #complete -o nospace -C ${pkgs.awscli}/bin/aws_completer aws
-    '';
+    promptInit =
+      let
+        shell-config = pkgs.callPackage ./shell-config.nix { };
+      in
+      ''
+        ${builtins.readFile (shell-config.override { dockerAliasEnabled = config.virtualisation.docker.enable; })}
+        autoload -U promptinit && promptinit && prompt pure
+        #complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
+        #complete -o nospace -C ${pkgs.awscli}/bin/aws_completer aws
+      '';
 
     setOptions = [
       "AUTO_CD"
