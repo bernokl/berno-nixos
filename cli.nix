@@ -2,9 +2,15 @@
 {
 
   environment.variables = {
-    EDITOR = "nvim";
     #LC_ALL = "en_US.UTF-8";
     TERM = "xterm-256color";
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    vimAlias = true;
+    viAlias = true;
   };
 
   users.defaultUserShell = lib.getExe pkgs.zsh;
@@ -22,7 +28,7 @@
     ohMyZsh.enable = true;
     ohMyZsh.plugins = [ "sudo" "z" "aws" ];
     shellInit = ''
-      #source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
+      source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
     '';
     promptInit =
       let
@@ -86,7 +92,7 @@
     cm = "xclip"; # Copy to middle click clipboard
     l = "ls -lF --time-style=long-iso";
     la = "l -a";
-    ls = "exa -h --git --color=auto --group-directories-first -s extension";
+    ls = "eza -h --git --color=auto --group-directories-first -s extension";
     lstree = "ls --tree";
     tree = "lstree";
 
@@ -101,8 +107,7 @@
     bat
     curl
     entr
-    #eza
-    exa
+    eza
     fd
     file
     fzf
@@ -119,6 +124,7 @@
     nettools
     nix-top
     nix-tree
+    nix2vimDemo
     nixpkgs-fmt
     p7zip
     parted
@@ -131,5 +137,6 @@
     wget
     which
     zip
+    manix
   ];
 }

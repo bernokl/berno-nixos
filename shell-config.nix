@@ -6,10 +6,8 @@
 , fd
 , gh
 , pure-prompt
-, sshuttle
 , dockerAliasEnabled ? true
 , prettyManPagesEnabled ? true
-, sshuttleEnabled ? true
 , zshPasteImprovementsEnabled ? true
 , exePathEnabled ? true
 }:
@@ -33,11 +31,11 @@ let
     export LESS_TERMCAP_ZO=$(tput ssupm)
     export LESS_TERMCAP_ZW=$(tput rsupm)
   '';
-  vpn = ''
-    function vpn() {
-        ${sshuttle}/bin/sshuttle --dns -r $1 0/0 --disable-ipv6 --no-latency-control
-    }
-  '';
+#  vpn = ''
+#    function vpn() {
+#        ${sshuttle}/bin/sshuttle --dns -r $1 0/0 --disable-ipv6 --no-latency-control
+#    }
+#  '';
   exe-path = ''
     function exe-path() {
       readlink $(which $1)
@@ -90,6 +88,8 @@ let
 
     bindkey -r ^V
   '';
+
+#  ${optionalString sshuttleEnabled vpn}
 in
 writeShellScript "shellconfig.sh" ''
   if [ -n "''${commands[fzf-share]}" ]; then
@@ -100,7 +100,6 @@ writeShellScript "shellconfig.sh" ''
 
   ${optionalString dockerAliasEnabled docker}
   ${optionalString prettyManPagesEnabled prettyManPages}
-  ${optionalString sshuttleEnabled vpn}
   ${optionalString zshPasteImprovementsEnabled zshPasteImprovements}
   ${optionalString exePathEnabled exe-path}
 ''

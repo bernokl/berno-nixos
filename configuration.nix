@@ -9,6 +9,7 @@
     [
       ./hardware-configuration.nix
       ./cli.nix
+      ./base.nix
     ];
 
 
@@ -111,11 +112,11 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bernokl = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "berno";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-      firefox
       openssl
       htop
       git
@@ -124,6 +125,7 @@
       coreutils
       fd
       tmux
+      nix-top
       slack
       #emacsPackages.doom
       direnv
@@ -133,6 +135,9 @@
       mdbook-d2
       obs-studio
       vlc
+      discord
+			xclip
+      nixUnstable
       yubikey-personalization
       yubikey-personalization-gui
       yubikey-manager
@@ -141,7 +146,17 @@
     ];
   };
 
+  nix.settings.substituters = [
+    "https://cache.nixos.org"
+    "https://cache.iog.io"
+  ];
 
+  nix.settings.max-jobs = 16;
+
+  nix.settings.trusted-public-keys = [
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+  ];
 
   nix = {
     package = pkgs.nixFlakes;
@@ -154,11 +169,16 @@
   # List packages installed in system profile. To search, run:
   # $ x.package = pkgs.nixVersions.nix_2_17;nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    firefox
   ];
 
+	fonts = {
+    enableDefaultPackages = true;
+    packages = [ pkgs.nerdfonts ];
+  };
 
+	fonts.fonts = with pkgs; [ nerdfonts noto-fonts-emoji noto-fonts ];
 
   # Enable the 1Passsword GUI with myself as an authorized user for polkit
   programs._1password-gui = {
@@ -168,7 +188,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+# services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -182,6 +202,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  #system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
 }
