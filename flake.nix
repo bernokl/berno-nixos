@@ -11,8 +11,8 @@
 
   };
 
-  outputs = inputs @ {flake-parts, nix2vim, nixpkgs, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs = inputs @ { flake-parts, nix2vim, nixpkgs, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         # To import a flake module
         # 1. Add foo to inputs
@@ -25,35 +25,35 @@
         # those are more easily expressed in perSystem.
         nixosConfigurations.nixos =
           nixpkgs.lib.nixosSystem
-          {
-            system = "x86_64-linux";
-            modules = [
-              ./configuration.nix
-              ./hardware-configuration.nix
-	      {
-		nixpkgs.overlays = [
-		  nix2vim.overlay
-		];
-	      }
-            ];
-          };
+            {
+              system = "x86_64-linux";
+              modules = [
+                ./configuration.nix
+                ./hardware-configuration.nix
+                {
+                  nixpkgs.overlays = [
+                    nix2vim.overlay
+                  ];
+                }
+              ];
+            };
       };
 
-      systems = ["x86_64-linux"];
-      perSystem = {
-        config,
-        self',
-        inputs',
-        pkgs,
-        system,
-        ...
-      }: {
-        # Per-system attributes can be defined here. The self' and inputs'
-        # module parameters provide easy access to attributes of the same
-        # system.
+      systems = [ "x86_64-linux" ];
+      perSystem =
+        { config
+        , self'
+        , inputs'
+        , pkgs
+        , system
+        , ...
+        }: {
+          # Per-system attributes can be defined here. The self' and inputs'
+          # module parameters provide easy access to attributes of the same
+          # system.
 
-        # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
-        packages.default = pkgs.hello;
-      };
+          # Equivalent to  inputs'.nixpkgs.legacyPackages.hello;
+          packages.default = pkgs.hello;
+        };
     };
 }

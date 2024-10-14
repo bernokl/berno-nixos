@@ -28,8 +28,8 @@
     ohMyZsh.enable = true;
     ohMyZsh.plugins = [ "sudo" "z" "aws" ];
     shellInit = ''
-      source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
-			source /etc/nixos/secret.sh
+            source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
+      			source /etc/nixos/secret.sh
     '';
     promptInit =
       let

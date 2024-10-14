@@ -134,7 +134,7 @@
       obs-studio
       vlc
       discord
-			xclip
+      xclip
       yubikey-personalization
       yubikey-personalization-gui
       yubikey-manager
@@ -170,12 +170,12 @@
     firefox
   ];
 
-	fonts = {
+  fonts = {
     enableDefaultPackages = true;
     packages = [ pkgs.nerdfonts ];
   };
 
-	fonts.fonts = with pkgs; [ nerdfonts noto-fonts-emoji noto-fonts ];
+  fonts.fonts = with pkgs; [ nerdfonts noto-fonts-emoji noto-fonts ];
 
   # Enable the 1Passsword GUI with myself as an authorized user for polkit
   programs._1password-gui = {
@@ -185,7 +185,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-# services.openssh.enable = true;
+  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -31,11 +31,11 @@ let
     export LESS_TERMCAP_ZO=$(tput ssupm)
     export LESS_TERMCAP_ZW=$(tput rsupm)
   '';
-#  vpn = ''
-#    function vpn() {
-#        ${sshuttle}/bin/sshuttle --dns -r $1 0/0 --disable-ipv6 --no-latency-control
-#    }
-#  '';
+  #  vpn = ''
+  #    function vpn() {
+  #        ${sshuttle}/bin/sshuttle --dns -r $1 0/0 --disable-ipv6 --no-latency-control
+  #    }
+  #  '';
   exe-path = ''
     function exe-path() {
       readlink $(which $1)
@@ -89,7 +89,7 @@ let
     bindkey -r ^V
   '';
 
-#  ${optionalString sshuttleEnabled vpn}
+  #  ${optionalString sshuttleEnabled vpn}
 in
 writeShellScript "shellconfig.sh" ''
   if [ -n "''${commands[fzf-share]}" ]; then

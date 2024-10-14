@@ -35,8 +35,8 @@
     };
     fwupd.enable = true;
     #dbus.packages = with pkgs; [ dconf ];
-#    openssh.enable = true;
-#    openssh.settings.PasswordAuthentication = false;
+    #    openssh.enable = true;
+    #    openssh.settings.PasswordAuthentication = false;
     #tlp.enable = true;
   };
 
