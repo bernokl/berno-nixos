@@ -36,7 +36,8 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  # time.timeZone = "America/New_York";
+  time.timeZone = "europe/germany";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -61,6 +62,10 @@
   #services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+
+   # Make auto-repeat on key hold work faster.
+   services.xserver.displayManager.xserverArgs = [ "-ardelay 300" "-arinterval 20" ];
+   services.xserver.xkbOptions = "caps:escape";
 
   nixpkgs.config.allowUnfree = true;
   # Add steam for Finn
@@ -149,6 +154,11 @@
   ];
 
   nix.settings.max-jobs = 16;
+
+  systemd.tmpfiles.rules = [
+    "L+ /lib64/ld-linux-x86-64.so.2 - - - - ${pkgs.glibc}/lib64/ld-linux-x86-64.so.2"
+  ];
+
 
   nix.settings.trusted-public-keys = [
     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="

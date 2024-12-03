@@ -1,4 +1,16 @@
 { config, pkgs, lib, inputs, ... }:
+let
+  #  my-cool-ass-vim = pkgs.neovimBuilder {
+  aiVim = pkgs.neovimBuilder ({modules, ...}: {
+    imports = [
+      ./neovim.nix
+      modules.ai
+    ];
+  });
+  boringVim = pkgs.neovimBuilder {
+    imports = [ ./neovim.nix ];
+  };
+in
 {
 
   environment.variables = {
@@ -62,6 +74,7 @@
   };
 
   environment.shellAliases = {
+    vib = "${boringVim}/bin/nvim";
     ga = "git add";
     gc = "git commit";
     gcm = "git commit -m";
@@ -125,7 +138,7 @@
     nettools
     nix-top
     nix-tree
-    nix2vimDemo
+    aiVim
     nixpkgs-fmt
     p7zip
     parted
